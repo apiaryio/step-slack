@@ -11,5 +11,4 @@ build:
 publish:
   steps:
     - internal/publish-step:
-        owner: apiaryio
-
+        owner: APIPCS
