@@ -32,7 +32,7 @@ else
   export ACTION_URL="https://app.wercker.com/APIPCS/$WERCKER_APPLICATION_NAME/runs/build/$WERCKER_BUILD_ID"
 fi
 
-export WERCKER_SHORT_RUN_ID=${WERCKER_RUN_ID:0:5}
+export WERCKER_SHORT_RUN_ID="#${WERCKER_RUN_ID:0:5}"
 
 if [ -n $WERCKER_RESULT ]; then
   export MESSAGE_RESULT="Sucess"

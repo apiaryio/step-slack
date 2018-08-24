@@ -39,6 +39,10 @@ The MIT License (MIT)
 
 # Changelog
 
+## 1.6.4
+
+- Better hash formating (added # char)
+
 ## 1.6.3
 
 - Using `WERCKER_RUN_ID` instead `WERCKER_BUILD_ID` that is only in build workflow
