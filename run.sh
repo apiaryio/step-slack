@@ -21,6 +21,10 @@ if [ -z "$WERCKER_SLACK_NOTIFIER_ICON_URL" ]; then
   export WERCKER_SLACK_NOTIFIER_ICON_URL="https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 fi
 
+if [ -n "$WERCKER_SLACK_NOTIFIER_ICON_EMOJI" ]; then
+  SLACK_ICON="\"icon_emoji\":\"$WERCKER_SLACK_NOTIFIER_ICON_EMOJI\","
+fi
+
 # check if this event is a build or deploy
 if [ -n "$DEPLOY" ]; then
   # its a deploy!
@@ -74,6 +78,7 @@ fi
 json=$json"
     \"username\": \"$WERCKER_SLACK_NOTIFIER_USERNAME\",
     \"icon_url\":\"$WERCKER_SLACK_NOTIFIER_ICON_URL\",
+    $SLACK_ICON
     \"attachments\":[
       {
         \"fallback\": \"$FALLBACK\",
