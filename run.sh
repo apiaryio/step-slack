@@ -21,6 +21,10 @@ if [ -z "$WERCKER_SLACK_NOTIFIER_ICON_URL" ]; then
   export WERCKER_SLACK_NOTIFIER_ICON_URL="https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 fi
 
+if [ -n "$WERCKER_SLACK_NOTIFIER_ICON_EMOJI" ]; then
+  SLACK_ICON="\"icon_emoji\":\"$WERCKER_SLACK_NOTIFIER_ICON_EMOJI\","
+fi
+
 # check if this event is a build or deploy
 if [ -n "$DEPLOY" ]; then
   # its a deploy!
@@ -29,11 +33,32 @@ if [ -n "$DEPLOY" ]; then
 else
   # its a build!
   export ACTION="build"
-  export ACTION_URL=$WERCKER_BUILD_URL
+  export ACTION_URL="https://app.wercker.com/APIPCS/$WERCKER_APPLICATION_NAME/runs/build/$WERCKER_BUILD_ID"
 fi
 
-export MESSAGE="<$ACTION_URL|$ACTION> for $WERCKER_APPLICATION_NAME by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH"
-export FALLBACK="$ACTION for $WERCKER_APPLICATION_NAME by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH"
+export WERCKER_SHORT_RUN_ID="#${WERCKER_GIT_COMMIT:0:5}"
+
+if [ -n $WERCKER_RESULT ]; then
+  export MESSAGE_RESULT="Success"
+fi
+
+if [ "$WERCKER_RESULT" = "failed" ]; then
+  export MESSAGE_RESULT="Failed"
+fi
+
+if [ "$WERCKER_RESULT" = "passed" ]; then
+  export MESSAGE_RESULT="Success"
+fi
+
+WERCKER_TIME_START=$WERCKER_MAIN_PIPELINE_STARTED
+WERCKER_TIME_END=$(date +"%s")
+WERCKER_TIME_DIFF=$(($WERCKER_TIME_END-$WERCKER_TIME_START))
+WERCKER_TIME_SPENT="in $(($WERCKER_TIME_DIFF / 60)) min $(($WERCKER_TIME_DIFF % 60)) sec."
+
+export GIT_REPOSITORY_URL="https://$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY"
+export GIT_COMMIT_URL="https://$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY/commit/$WERCKER_GIT_COMMIT"
+export MESSAGE="$MESSAGE_RESULT: <$ACTION_URL|$WERCKER_SHORT_RUN_ID> for <$GIT_REPOSITORY_URL|$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY> by $WERCKER_STARTED_BY on branch <$GIT_COMMIT_URL|$WERCKER_GIT_BRANCH> $WERCKER_TIME_SPENT"
+export FALLBACK="$ACTION:  <$GIT_REPOSITORY_URL|$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY> by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH"
 export COLOR="good"
 
 if [ "$WERCKER_RESULT" = "failed" ]; then
@@ -53,6 +78,7 @@ fi
 json=$json"
     \"username\": \"$WERCKER_SLACK_NOTIFIER_USERNAME\",
     \"icon_url\":\"$WERCKER_SLACK_NOTIFIER_ICON_URL\",
+    $SLACK_ICON
     \"attachments\":[
       {
         \"fallback\": \"$FALLBACK\",

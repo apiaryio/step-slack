@@ -11,6 +11,7 @@ webhook first (see the Slack integrations page to set one up).
 - `username` Username of the notification message
 - `channel` (optional) The Slack channel (excluding `#`)
 - `icon_url` (optional) A url that specifies an image to use as the avatar icon in Slack
+- `icon_emoji` (optional) A emoji that specifies an image to use as the avatar icon in Slack
 - `notify_on` (optional) If set to `failed`, it will only notify on failed
 builds or deploys.
 - `branch` (optional) If set, it will only notify on the given branch
@@ -39,9 +40,41 @@ The MIT License (MIT)
 
 # Changelog
 
+## 1.7.0
+
+- Added support Slack `icon_emoji`
+
+## 1.6.5
+
+- Using WERCKER_GIT_COMMIT as build ID
+- Fix typo
+
+## 1.6.4
+
+- Better hash formating (added # char)
+
+## 1.6.3
+
+- Using WERCKER_RUN_ID instead of WERCKER_BUILD_IDas that is only available in the build pipeline
+- Added default Success for `WERCKER_RESULT` if notifier isn't run in after steps.
+- Rename `RESULT` to `MESSAGE_RESULT` to prevent conflict in script
+
+## 1.6.2
+
+- Fixed missing link in message
+
+## 1.6.1
+
+- Better message format
+
+## 1.6.0
+
+- `$WERCKER_BUILD_URL` replaced by `$WERCKER_RUN_URL`
+- git branch is link in message
+
 ## 1.2.0
 
-- added `branch` option
+- Added `branch` option
 
 ## 1.1.0
 
@@ -51,6 +84,6 @@ The MIT License (MIT)
 
 - Initial release
 
-## Contributing to this repository 
+## Contributing to this repository
 
-Oracle welcomes contributions to this repository from anyone.  Please see [CONTRIBUTING](CONTRIBUTING.md) for more information. 
+Oracle welcomes contributions to this repository from anyone.  Please see [CONTRIBUTING](CONTRIBUTING.md) for more information.
