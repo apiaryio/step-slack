@@ -39,6 +39,10 @@ The MIT License (MIT)
 
 # Changelog
 
+## 1.6.1
+
+- better message format
+
 ## 1.6.0
 
 - `$WERCKER_BUILD_URL` replaced by `$WERCKER_RUN_URL`
