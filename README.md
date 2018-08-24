@@ -50,8 +50,8 @@ The MIT License (MIT)
 
 ## 1.6.3
 
-- Using `WERCKER_RUN_ID` instead `WERCKER_BUILD_ID` that is only in build workflow
-- Added default Sucess for `WERCKER_RESULT` if notifier isn't run in after steps.
+- Using WERCKER_RUN_ID instead of WERCKER_BUILD_IDas that is only available in the build pipeline
+- Added default Success for `WERCKER_RESULT` if notifier isn't run in after steps.
 - Rename `RESULT` to `MESSAGE_RESULT` to prevent conflict in script
 
 ## 1.6.2
