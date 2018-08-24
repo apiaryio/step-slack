@@ -39,6 +39,10 @@ The MIT License (MIT)
 
 # Changelog
 
+## 1.6.2
+
+- fixed missing link in message
+
 ## 1.6.1
 
 - better message format
