@@ -41,6 +41,11 @@ The MIT License (MIT)
 
 ## 1.6.4
 
+- As ID build using `WERCKER_GIT_COMMIT`
+- fix typo
+
+## 1.6.4
+
 - Better hash formating (added # char)
 
 ## 1.6.3
