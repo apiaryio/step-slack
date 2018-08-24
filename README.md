@@ -39,10 +39,10 @@ The MIT License (MIT)
 
 # Changelog
 
-## 1.6.4
+## 1.6.5
 
-- As ID build using `WERCKER_GIT_COMMIT`
-- fix typo
+- Using WERCKER_GIT_COMMIT as build ID
+- Fix typo
 
 ## 1.6.4
 
@@ -56,11 +56,11 @@ The MIT License (MIT)
 
 ## 1.6.2
 
-- fixed missing link in message
+- Fixed missing link in message
 
 ## 1.6.1
 
-- better message format
+- Better message format
 
 ## 1.6.0
 
@@ -69,7 +69,7 @@ The MIT License (MIT)
 
 ## 1.2.0
 
-- added `branch` option
+- Added `branch` option
 
 ## 1.1.0
 
